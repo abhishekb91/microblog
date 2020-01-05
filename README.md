@@ -8,6 +8,7 @@
 
 ## Contents
 - [Installing](#-installing)
+- [Unit Tests](#-unit-tests)
 
 
 
@@ -16,3 +17,8 @@ All the dependencies are listed in the requirements.txt file. The application is
 install the dependencies, execute:
 
     pip install -r requirements.txt
+    
+## Unit Tests
+The unit tests are written in the `tests.py` using python's unittest module and can be run as:
+
+    python tests.py
