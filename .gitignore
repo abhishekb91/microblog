@@ -1,5 +1,5 @@
 app.db
 .idea/
 logs/*
-.env.dev
+.env
 *__pycache__/
