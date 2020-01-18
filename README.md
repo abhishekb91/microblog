@@ -7,9 +7,9 @@
 </p>
 
 ## Contents
-- [Installing](#-installing)
-- [Unit Tests](#-unit-tests)
-- [Searching](#-searching)
+- [Installing](#installing)
+- [Unit Tests](#unit-tests)
+- [Searching](#searching)
 
 
 
