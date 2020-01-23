@@ -1,0 +1,4 @@
+app.db
+.idea/
+logs/*
+*__pycache__/

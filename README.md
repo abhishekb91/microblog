@@ -7,40 +7,55 @@
 </p>
 
 ## Contents
-- [Installing](#installing)
+- [Installing Application](#installing-application)
+- [Starting Application](#starting-application)
+    - [Reindexing Models](#reindexing-models)
 - [Unit Tests](#unit-tests)
-- [Searching](#searching)
 
+## Installing Application
+The application uses Docker to create containers which hosts the application and all the dependencies. Before installing 
+the application ensure [docker](https://www.docker.com/) installed in your local machine. Once docker is installed, 
+go the project root directory and run:  
 
-
-## Installing
-All the dependencies are listed in the requirements.txt file. The application is written in Python 3, in order to 
-install the dependencies, execute:
-
-    pip install -r requirements.txt
+    docker-compose build
     
-After the application is installed, we need to update the indexes for [searching](#-searching) to work, for this reindex 
-the models which will be used for searching
+This command will download all dependencies and will install the application in docker container.
+
+
+## Starting Application
+Once we've installed the application using `docker-compose build`, we can easily start the application by:
+    
+    docker-compose up -d
+
+This will start the application, database and elasticsearch in detached mode
+
+### Reindexing Models
+After the application is installed and running, we need to update the indexes for [searching](#-searching) to work. 
+For this let's `reindex` all the models used for searching
 
 Currently we support searching in 
 - Posts
 
-In order to reindex the POST, we'll use `flask shell` command from the project root directory:
+Since the application is running in a container we created, we first need to connect to the `microblog_flask_app` 
+container which host our application. Ensure the application is running, go to the
+project root directory and execute:
+    
+    docker exec -it microblog_flask_app bash
+    
+This connects to the `microblog_flask_app` container in interactive mode so that we can run/check the application. In 
+order to reindex the POST, we'll use `flask shell` command from the container:
 ```shell script
 $ flask shell
-Python 3.7.4 (default, Oct 22 2019, 11:44:14)
-[Clang 11.0.0 (clang-1100.0.33.8)] on darwin
+Python 3.8.0 (default, Nov 15 2019, 02:22:06)
+[GCC 8.3.0] on linux
 App: app [development]
-Instance: /Users/user/PythonWorkspace/microblog/instance
+Instance: /home/microblog/instance
 >>> Post.reindex()
 >>> 
 ```
     
 ## Unit Tests
-The unit tests are written in the `tests.py` using python's unittest module and can be run as:
+The unit tests are written in the `tests.py` using python's unittest module and can by connecting to the container and 
+executing:
 
     python tests.py
-    
-## Searching
-The application uses `elasticsearch` for searching the posts. Ensure it is installed and running in order for it to 
-work correctly.
