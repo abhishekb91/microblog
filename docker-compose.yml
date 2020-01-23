@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./services/web
+    container_name: microblog_flask_app
+    volumes:
+      - ./services/web/:/home/microblog/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
+  db:
+    image: postgres:12.1-alpine
+    container_name: microblog_postgres
+    volumes:
+      - microblog_db:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=microblog_user
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=microblog
+  es01:
+    image: elasticsearch:7.5.1
+    container_name: microblog_es01
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+volumes:
+  microblog_db:
+  data01:
