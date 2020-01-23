@@ -13,9 +13,13 @@
 - [Unit Tests](#unit-tests)
 
 ## Installing Application
-The application uses Docker to create containers which hosts the application and all the dependencies. Before installing 
-the application ensure [docker](https://www.docker.com/) installed in your local machine. Once docker is installed, 
-go the project root directory and run:  
+To ensure all the configuration is passed as an environment variables to the application, we will create a local 
+`.env.dev` file which gets passed to the container as a env_file. Copying the content of `.dev.dev-sample` and make 
+changes as required according to your local machine.
+  
+Once we've made the environment file, we need to install [docker](https://www.docker.com/) in your local machine to 
+create containers which hosts the application and all the dependencies. Once docker is installed, go the project root 
+directory and run:  
 
     docker-compose build
     
